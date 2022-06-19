@@ -1,0 +1,340 @@
+.header {
+    position: relative;
+    width: 100%;
+    padding: 20px 0;
+    background: $color-white;
+
+    &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 3;
+        background: $color-white;
+    }
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__logo {
+        position: relative;
+        z-index: 4;
+        flex: 0 0 100px;
+    }
+
+    &__menu {
+        position: relative;
+        z-index: 4;
+
+        @media (max-width:$md4) {
+            position: fixed;
+            top: 0;
+            right: -150%;
+            z-index: 2;
+            height: 100vh;
+            width: 100vw;
+            max-width: 320px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            transition: 0.5s;
+
+            &.active {
+                right: 0;
+            }
+        }
+    }
+}
+
+.logo {}
+
+.menu-button {}
+
+.menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background: $color-white;
+
+    @media (max-width:$md4) {
+        display: block;
+        padding: 80px 20px 20px;
+    }
+
+    &__item {
+
+        margin-left: 40px;
+        padding: 10px 0px;
+
+
+
+        &:last-child {
+            padding-right: 0;
+        }
+
+        @media (max-width:$md4) {
+            margin-left: 0;
+        }
+
+
+    }
+
+    &__link {
+        flex: 1 1 auto;
+        padding-left: 10px;
+        font-family: $mainFont;
+        font-size: 18px;
+        color: $color-black;
+        transition: $transition;
+
+        &.active {
+            color: $color-red;
+
+            +svg {
+                fill: $color-red;
+            }
+        }
+
+
+        @media (min-width:992px) {
+            &:hover {
+                color: $color-red;
+
+                +svg {
+                    fill: $color-red;
+                }
+            }
+
+
+        }
+
+    }
+
+    &__item-has-children {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    &__submenu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1;
+
+        @media (max-width:$md4) {
+            position: static;
+
+        }
+
+        &_1 {}
+
+        &_2 {
+            top: 0;
+            left: 100%;
+        }
+    }
+
+    svg {
+        flex: 0 0 10px;
+        margin-left: 3px;
+        fill: $color-black;
+        transition: $transition;
+    }
+}
+
+.submenu {
+    background: $color-white;
+    box-shadow: $shadow-light;
+    opacity: 0;
+    pointer-events: none;
+    transition: $transition;
+
+    &.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    @media (max-width:$md4) {
+        display: block;
+        width: 100%;
+        opacity: 1;
+        pointer-events: auto;
+        box-shadow: none;
+        max-height: 0; //для jquery скрипта убрать max-height: 0; заменить display: block; на display: none;
+        overflow: hidden;
+        transition: max-height 0.5s;
+    }
+
+    &__item {
+        min-width: 120px;
+        padding: 10px 10px 10px 0px;
+
+        @media (max-width:$md4) {
+            padding-right: 0;
+        }
+    }
+
+    svg {
+        transform: rotate(-90deg);
+
+        @media (max-width:$md4) {
+            transform: rotate(0deg);
+        }
+    }
+}
+
+
+.menu-button {
+    display: none;
+    position: relative;
+    z-index: 3;
+
+    @media (max-width: $md4) {
+        display: block;
+        padding: 10px 0px 10px 10px;
+        background-color: transparent;
+        border: none;
+
+        span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            margin: 3px;
+            background-color: $color-black;
+            opacity: 1;
+            transform: scale(1);
+            transform: translate(0px, 0px) rotate(0deg);
+            transition: all 0.3s ease 0s;
+        }
+    }
+}
+
+.menu-button.active {
+    @media (max-width: $md4) {
+        span {
+            &:first-child {
+                transform: translate(0px, 4px) rotate(45deg);
+            }
+
+            &:nth-child(2) {
+                opacity: 0;
+                transform: scale(0);
+                margin: 0;
+            }
+
+            &:last-child {
+                transform: translate(0px, -6px) rotate(-45deg);
+            }
+        }
+    }
+}
+
+
+// меню бургер
+// .menu-button {
+//     display: none;
+// }
+
+// @media (max-width: $md4) {
+//     .logo {
+//         z-index: 3;
+//     }
+
+//     .menu-button {
+//         display: block;
+//         position: relative;
+//         width: 27px;
+//         height: 18px;
+//         z-index: 3;
+//         // top: 10px;
+//     }
+
+//     .menu-button span {
+//         position: absolute;
+//         background-color: #fff;
+//         border-radius: 1px;
+//         position: absolute;
+//         left: 0;
+//         width: 100%;
+//         height: 2px;
+//         top: 8px;
+//         transition: all 0.2s linear 0s;
+//     }
+
+//     .menu-button:before,
+//     .menu-button:after {
+//         content: "";
+//         background-color: #fff;
+//         border-radius: 1px;
+//         position: absolute;
+//         width: 100%;
+//         height: 2px;
+//         left: 0;
+//         transition: all 0.3s linear 0s;
+//     }
+
+//     .menu-button:before {
+//         top: 0;
+//     }
+
+//     .menu-button:after {
+//         bottom: 0;
+//     }
+
+//     .menu-button.active span {
+//         transform: scale(0);
+//         transition: all 0.1s linear 0s;
+//     }
+
+//     .menu-button.active:before {
+//         transform: rotate(45deg);
+//         top: 8px;
+//     }
+
+//     .menu-button.active:after {
+//         transform: rotate(-45deg);
+//         bottom: 8px;
+//     }
+
+//     .nav {
+//         position: fixed;
+//         top: -250%;
+//         right: 0;
+//         width: 100%;
+//         height: 100vh;
+//         z-index: 1;
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         overflow: auto;
+//         transition: all 1.2s ease 0.3s;
+//         background-color: rgba(53, 96, 146, 0.9);
+//         padding: 0px 0px 0px 0px;
+
+//         &__list {
+//             flex-direction: column;
+//         }
+
+//         &__li {
+//             margin-bottom: 40px;
+//             max-height: 80px;
+//         }
+
+//         &__link {
+//             font-size: 24px;
+//         }
+//     }
+
+//     .nav.active {
+//         top: 0px;
+//         transition: all 1.2s ease 0s;
+//     }
+// }

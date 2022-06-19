@@ -1,0 +1,116 @@
+// встроенный математический модуль scss
+@use "sass:math";
+// ===========================переменные
+
+$minwidth: 320px;
+$maxScreenWidth: 1920px;
+$maxwidth: 1360px;
+$md1: $maxwidth;
+$md2: 1200px;
+$md3: 1000px;
+$md4: 768px;
+$md5: 576px;
+$md6: 480px;
+// шрифты
+$mainFont: "Roboto-Regular", sans-serif;
+// корневой размер шрифта для тега html и функции rem()
+$rem: 14;
+// цвета
+$color-black: #231f20;
+$color-white: #ffffff;
+$color-red: #ec2b2f;
+$color-blue: #0073b7;
+// $hover-blue: #379edb;
+$hover-blue: darken(#0073b7, 7%);
+$hover-red: darken(#ec2b2f, 7%);
+
+$shadow-blue: 4px 8px 10px rgba(0, 115, 183, 0.15);
+$shadow-light: 0px 0px 10px rgba(35, 31, 32, 0.1);
+
+$border-radius: 5px;
+$transition: 0.3s;
+
+// экран, контейнер и брейкпойнты
+$minwidth: 320px;
+$maxScreenWidth: 1920px;
+$maxContainerWidth: 1320px;
+$md1: $maxContainerWidth;
+$md2: 1200px;
+$md3: 992px;
+$md4: 768px;
+$md5: 576px;
+$md6: 480px;
+// боковые поля
+$fiels: 12px;
+// половина межколоночника
+$gap: math.div(24, 2) + px;
+// ===========================подключение шрифтов
+
+@mixin fonts($font_name, $file_name, $weight, $style) {
+	@font-face {
+		font-family: $font_name;
+		font-display: swap;
+		src: url("../fonts/#{$file_name}.woff") format("woff"),
+		url("../fonts/#{$file_name}.woff2") format("woff2");
+		font-weight: #{$weight};
+		font-style: #{$style};
+	}
+}
+
+@import "_fonts";
+
+// подключение стилей иконочного шрифта
+@import "_icons";
+
+// ================================mixins
+@mixin before {
+	&::before {
+		content: "";
+		position: absolute;
+		top: -7px;
+		left: 20px;
+		border-left: 9px solid transparent;
+		border-right: 9px solid transparent;
+		border-bottom: 9px solid $color-white;
+	}
+}
+
+@mixin percentage-width($el-width, $parent-width) {
+	width: math.div($el-width, $parent-width) * 100%;
+}
+
+@mixin percentage-value($property, $el-width, $parent-width) {
+	#{$property}: math.div($el-width, $parent-width) * 100%;
+}
+
+@mixin percentage-max-width($el-width, $parent-width) {
+	max-width: math.div($el-width, $parent-width) * 100%;
+}
+
+@mixin percentage-flex($el-width, $parent-width) {
+	flex-basis: math.div($el-width, $parent-width) * 100%;
+}
+
+@mixin columns-width($columns) {
+	width: math.div(100%, $columns);
+}
+
+@mixin row-margins() {
+	margin-left: -$gap;
+	margin-right: -$gap;
+}
+
+@mixin col-paddings() {
+	padding-left: $gap;
+	padding-right: $gap;
+}
+
+@function em($sz, $fsz) {
+	$val: math.div($sz, $fsz)+em;
+	@return $val;
+}
+
+@function rem($sz, $rem) {
+	$val: math.div($sz, $rem)+rem;
+	@return $val;
+}

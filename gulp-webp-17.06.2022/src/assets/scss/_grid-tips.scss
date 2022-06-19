@@ -1,0 +1,111 @@
+.grid-wrapper {
+	margin-top: 200px;
+	width: 40%;
+	/* grid по сути определяет не ширину блоков, а линии, 
+	разделяющие колонки и строки и расстояния между ними, которые и заполняют блоки*/
+	// блочный грид-контейнер
+	// display: grid;
+	// строчный грид-контейнер (как inline-flex)
+	// display: inline-grid;
+	// для линий грида можно задать имена в квадратных скобках и каждой задать свое значение
+	// grid-template-columns: [first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end];
+	// container с помощью гридов
+	// grid-template-columns: [left] 1fr [main-content-start] repeat(12, 120px) [main-content-end right-space] 1fr [right];
+	// grid-template-rows: [row1-start] 25% [row1-end] 100px [third-line] auto [last-line];
+	// подробно https://css-tricks.com/snippets/css/complete-guide-grid/
+	// колонки
+	// grid-template-columns: 200px 200px 200px;
+	/* fr - это равные части на которые делится свободное пространство, ими можно задать колонки и строки
+	Когда одни колонки и строки определены с помощью пикселей, процентов или em, 
+	а любые другие колонки и строки — с помощью fr, то fr просто разделят всё оставшееся пространство на равные части.
+	*/
+	// grid-template-columns: 1fr 5fr;
+	// grid-template-columns: 50px 1fr 1fr 1fr 50px;
+	// равные по ширине повторяющиеся колонки
+	grid-template-columns: repeat(3, 1fr);
+	// равные по ширине повторяющиеся колонки чередуются с колонками конкретной ширины
+	// grid-template-columns: 20px repeat(6, 1fr) 20px;
+	// 5 раз чередуются колонки с разной шириной
+	// grid-template-columns: repeat(5, 1fr 2fr);
+	// колонки неявного грида
+	// grid-auto-columns: 200px 200px 200px;
+
+	// строки
+	// grid-template-rows: 100px 1fr;
+	// равные по высоте повторяющиеся строки
+	// grid-template-rows: repeat(3, 1fr);
+	// равные по высоте повторяющиеся строки чередуются с строками конкретной высоты
+	// grid-template-rows: 20px repeat(6, 1fr) 20px;
+	// 5 раз чередуются строки с разной высотой
+	// grid-template-rows: repeat(5, 1fr 2fr);
+	//строки неявного грида
+	// grid-auto-rows: 200px;
+	// minmax зажает минимальное и максимальное ограничение размера
+	// auto значит размер определяется контентом внутри блока
+	// grid-auto-rows: minmax(100px, auto);
+
+	/*grid-template — сокращённый вариант комбинации grid-template-rows и grid-template-columns.
+	grid-template: строки / колонки
+Например, grid-template: 50% 50% / 200px создаст grid-сетку с двумя строками по 50% каждая
+ и одним столбцом шириной 200 пикселей. 	*/
+	// grid-template: 50% 50% / 200px;
+	.grid-box {
+		background: red;
+		padding: 20px;
+
+		&_1 {
+			// на какой линии колонок грида начинается элемент
+			grid-column-start: 1;
+			/* на какой линии колонок грида заканчивается элемент
+			его значение может быть меньше чем значение grid-column-start или быть отрицательным (-2)
+			если нужно напрвление справа налево*/
+			grid-column-end: 4;
+			/*сокращает запись grid-column-start: 1;grid-column-end: 4; задавая значения через косую черту
+			span тоже работает с этим свойством grid-column: 1/span 3*/
+			grid-column: 1 / 4;
+
+			// на какой линии строк грида начинается элемент
+			grid-row-start: 1;
+			/*на какой линии строк грида заканчивается элемент
+			его значение может быть меньше чем значение grid-row-start или быть отрицательным (-2)
+			если нужно напрвление снизу вверх*/
+			grid-row-end: 2;
+			/* сокращает запись grid-column-start: 1;grid-column-end: 4; задавая значения через косую черту
+			 span тоже работает с этим свойством grid-row: 1/span 1*/
+			grid-row: 1 / 2;
+			/* grid-column-start: span grid-column-end: span и 
+			grid-row-start: span grid-row-end: span задает не линию грида,
+			 на которой заканчивается блок, 
+			а количество ячеек сетки, которые этот блок занимает*/
+			// grid-row-end: span 2;
+			/* grid-area принимает 4 значения, разделенные косой чертой /: 
+			grid-row-start, grid-column-start, grid-row-end и grid-column-end.*/
+			// grid-area: 1 / 1 / 4 / 6;
+			/*  с помощью grid-area блоки можно наложить друг на друга чтобы они пересекались
+			#block-1 { grid-area: 1 / 4 / 6 / 5; } 	#block-2 {grid-area: 2 / 3 / 5 / 6; }*/
+		}
+		&_2 {
+			/* Если grid-элементы не имеют конкретного расположения с grid-area, grid-column, grid-row и т.д., 
+			они автоматически размещаются, следуя порядку, написанному в коде. 
+			Работает только без grid-area, grid-column, grid-row и т.д.
+			Мы можем изменить это с помощью свойства order. Изначально все grid-элементы имеют order, равный 0, 
+			но этому свойству можно присвоить любое положительное или отрицательное значение, примерно как у z-index
+		*/
+			order: 6;
+		}
+		&_3 {
+		}
+		&_4 {
+		}
+		&_5 {
+			// на какой линии колонок грида начинается элемент
+			grid-column-start: 2;
+			// на какой линии колонок грида заканчивается элемент
+			grid-column-end: 3;
+			// на какой линии строк грида начинается элемент
+			grid-row-start: 3;
+			// на какой линии строк грида заканчивается элемент
+			grid-row-end: 4;
+		}
+	}
+}
