@@ -32,8 +32,7 @@ body {
 	flex: 1 1 auto;
 }
 
-// git config --global user.name "Tatyana-Tikhonova"
-// git config --global user.email "tantikh2020@gmail.com"
+
 
 // сетка для отладки
 .grid-debug {
@@ -117,24 +116,6 @@ p {
 	@media (max-width: $md5) {
 		max-width: none;
 	}
-}
-
-// ============================================общие стили
-.ibg {
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;
-	position: relative;
-}
-
-.ibg img {
-	width: 0;
-	height: 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	opacity: 0;
-	visibility: hidden;
 }
 
 // ============================================стили секций=============================
